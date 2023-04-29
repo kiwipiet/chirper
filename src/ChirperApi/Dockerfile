@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["ChirperApi.csproj", "."]
-RUN dotnet restore "./ChirperApi.csproj"
+COPY ["Chirper.Api.csproj", "."]
+RUN dotnet restore "./Chirper.Api.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "ChirperApi.csproj" -c Release -o /app/build
+RUN dotnet build "Chirper.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "ChirperApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Chirper.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "ChirperApi.dll"]
+ENTRYPOINT ["dotnet", "Chirper.Api.dll"]
