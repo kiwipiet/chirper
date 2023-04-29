@@ -1,4 +1,4 @@
-using Chirper.Api;
+using Chirper.Api.Features.Chirps;
 
 var builder = WebApplication.CreateBuilder(args);
 
